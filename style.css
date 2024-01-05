@@ -1,0 +1,103 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: monospace;
+}
+body
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    transition:all 0.5s ease;
+}
+.container
+{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 800px;
+    height: 500px;
+    transition: 0.25s;
+}
+.container .box
+{
+    position: relative;
+    background: var(--img);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(0) brightness(1.25);
+}
+.container:hover .box
+{
+    filter: grayscale(1);
+}
+.container .box:hover{
+    filter: grayscale(0) brightness(1.25);
+}
+.container:has(.one:hover)
+{
+    grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+}
+.container:has(.two:hover)
+{
+    grid-template-columns: 0.5fr 2fr 0.5fr 0.5fr 0.5fr;
+}
+.container:has(.three:hover)
+{
+    grid-template-columns: 0.5fr 0.5fr 2fr 0.5fr 0.5fr;
+}
+.container:has(.four:hover)
+{
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 2fr 0.5fr;
+}
+.container:has(.five:hover)
+{
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 2fr;
+}
+.container .box::before
+{
+    content: " ";
+    position: absolute;
+    top: -1px;
+    width: 100%;
+    height: calc(100% + 2px);
+    background: linear-gradient(#000 , transparent , #000);
+}
+.container .box:nth-child(even)
+{
+    transform: translateY(30px);
+}
+.container .box:nth-child(odd)
+{
+    transform: translateY(-30px);
+}
+.container .box::after
+{
+    content: attr(data-text);
+    position: absolute;
+    bottom: 100px;
+    background: #fff;
+    font-size: 1.2em;
+    color: #000;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.5s;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    -webkit-box-reflect: below 2px linear-gradient(transparent ,#0333);
+}
+.container .box:hover::after
+{
+    opacity: 1;
+    bottom: -70px;
+}
